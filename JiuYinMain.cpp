@@ -8,6 +8,7 @@
 #include"JiuYinWork.h"
 #include"resource.h"
 #include<windowsx.h>
+#include"GetNetTime.h"
 #include<atlbase.h>
 
 
@@ -108,7 +109,7 @@ unsigned int WINAPI CloseWindows(void * param){
 		{
 			SendMessage(hwnd, WM_CLOSE, 0, 0);
 		}
-		Sleep(20);
+		Sleep(2);
 
 	}
 }
@@ -275,6 +276,17 @@ BOOL Dlg_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam) {
 		TEXT("config.ini"));
 	InitConfigFormFile(hwnd, ConfigPath);
 	//InitializeCriticalSection(&g_cs_fic);
+
+	DWORD dwTime;
+	SYSTEMTIME systemtime;
+	if (ServerTimeToSysTime(&systemtime))
+	{
+		SetSystemTime(&systemtime);
+	}
+	else
+	{
+		MessageBox(NULL, L"time updata fail,plase restart", L"error", NULL);
+	}
 
 	return(TRUE);
 }

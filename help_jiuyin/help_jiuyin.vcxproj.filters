@@ -32,6 +32,9 @@
     <ClCompile Include="..\TerminateProcess.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="..\GetNetTime.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\JiuYinMain.h">
@@ -47,6 +50,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\TerminateProcess.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GetNetTime.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

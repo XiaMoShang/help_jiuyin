@@ -1,9 +1,11 @@
-﻿生成启动时间为 2016/11/20 1:05:52。
+﻿生成启动时间为 2016/11/24 4:38:04。
      1>项目“E:\MyCode\C++Code\help_jiuyin\help_jiuyin\help_jiuyin.vcxproj”在节点 2 上(Build 个目标)。
-     1>ResourceCompile:
-         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\rc.exe /D _UNICODE /D UNICODE /l"0x0409" /nologo /fo"Debug\JiuYin_Help.res" ..\JiuYin_Help.rc 
+     1>ClCompile:
+         D:\vs2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\GetNetTime.cpp
+         GetNetTime.cpp
        Link:
          D:\vs2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\MyCode\C++Code\help_jiuyin\Debug\help_jiuyin.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\MyCode\C++Code\help_jiuyin\Debug\help_jiuyin.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\MyCode\C++Code\help_jiuyin\Debug\help_jiuyin.lib" /MACHINE:X86 Debug\JiuYin_Help.res
+         Debug\GetNetTime.obj
          Debug\JiuYinMain.obj
          Debug\JiuYinWork.obj
          Debug\SaveLog.obj
@@ -13,4 +15,4 @@
 
 生成成功。
 
-已用时间 00:00:01.24
+已用时间 00:00:00.88

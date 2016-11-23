@@ -1,10 +1,11 @@
 
 #include"JiuYinWork.h"
 
-
 //#include <afx.h>
 
 using namespace std;
+
+
 
 #define WINDOWS_X 150
 #define WINDOWS_Y 108
@@ -113,7 +114,7 @@ BOOL JiuYinWork::GotoGameLoginWindow(DWORD DaquIndex, DWORD XiaoIndex)
 BOOL JiuYinWork::GameLogin(HWND hwnd, LPTSTR pNum, LPTSTR pPasWord)
 {
 	int fx, fy;
-	while (!FindPicEx(hwnd, 0, 0, 1024, 768, L"c:\\ts\\九阴.bmp", 0x151515, 0.8, fx, fy))
+	while (!FindPicEx(hwnd, 0, 0, 1024, 768, L"ts\\九阴.bmp", 0x151515, 0.8, fx, fy))
 		
 		Sleep(2000);
 
@@ -141,23 +142,23 @@ BOOL JiuYinWork::GameLogin(HWND hwnd, LPTSTR pNum, LPTSTR pPasWord)
 	LeftClick(hwnd, 508, 445);
 
 
-	while (!(FindPicEx(hwnd, 0, 0, 1024, 768, L"c:\\ts\\和平.bmp", 0x101010, 0.9, fx, fy)
-		|| FindPicEx(hwnd, 0, 0, 1024, 768, L"c:\\ts\\进入游戏.bmp", 0x101010, 0.9, fx, fy)
-		|| FindPicEx(hwnd, 0, 0, 1024, 768, L"c:\\ts\\和.bmp", 0x101010, 0.9, fx, fy)))
+	while (!(FindPicEx(hwnd, 0, 0, 1024, 768, L"ts\\和平.bmp", 0x101010, 0.9, fx, fy)
+		|| FindPicEx(hwnd, 0, 0, 1024, 768, L"ts\\进入游戏.bmp", 0x101010, 0.9, fx, fy)
+		|| FindPicEx(hwnd, 0, 0, 1024, 768, L"ts\\和.bmp", 0x101010, 0.9, fx, fy)))
 		Sleep(2000);
 
 
 	Sleep(2000);
 	LeftClick(hwnd, 495, 674);
 
-	while (!(FindPicEx(hwnd, 0, 0, 1024, 768, L"c:\\ts\\和平.bmp", 0x101010, 0.9, fx, fy)
-		|| FindPicEx(hwnd, 0, 0, 1024, 768, L"c:\\ts\\和.bmp", 0x101010, 0.9, fx, fy)))
+	while (!(FindPicEx(hwnd, 0, 0, 1024, 768, L"ts\\和平.bmp", 0x101010, 0.9, fx, fy)
+		|| FindPicEx(hwnd, 0, 0, 1024, 768, L"ts\\和.bmp", 0x101010, 0.9, fx, fy)))
 		Sleep(1000);
 
 	Sleep(2000);
 
-	while (!(FindPicEx(hwnd, 0, 0, 1024, 768, L"c:\\ts\\和平.bmp", 0x101010, 0.9, fx, fy)
-		|| FindPicEx(hwnd, 0, 0, 1024, 768, L"c:\\ts\\和.bmp", 0x101010, 0.9, fx, fy)))
+	while (!(FindPicEx(hwnd, 0, 0, 1024, 768, L"ts\\和平.bmp", 0x101010, 0.9, fx, fy)
+		|| FindPicEx(hwnd, 0, 0, 1024, 768, L"ts\\和.bmp", 0x101010, 0.9, fx, fy)))
 		Sleep(1000);
 	return 1;
 }
@@ -394,9 +395,16 @@ BOOL JiuYinWork::comparaLeftToRightFromTopEx(HWND hwnd, int h, int w, int Colour
 **************************************************************************/
 BOOL JiuYinWork::FindPicEx(HWND hwnd, int left, int top, int right, int bottom, LPTSTR PicPath, int ColourIdex, double ColourId, int &fx, int &fy)
 {
-	bool isFind = false;
+	BOOL isFind = false;
 
-	if (loadBitmap(PicPath) == 0)
+	WCHAR wcPicPath[MAX_PATH];
+	WCHAR wcPicPath1[MAX_PATH];
+
+	GetCurrentDirectory(MAX_PATH, wcPicPath1);
+
+	wsprintf(wcPicPath, L"%s%s%s", wcPicPath1, "\\", PicPath);
+
+	if (loadBitmap(wcPicPath) == 0)
 		return false;
 	if (left < 0)
 	{
@@ -604,7 +612,7 @@ BOOL JiuYinWork::ExitGameWindow(HWND hwnd)
 	LeftClick(hwnd, 518, 442);
 	Sleep(1000);
 
-	while (!FindPicEx(hwnd, 0, 0, 1024, 768, L"c:\\ts\\九阴.bmp", 0x151515, 0.8, fx, fy))
+	while (!FindPicEx(hwnd, 0, 0, 1024, 768, L"ts\\九阴.bmp", 0x151515, 0.8, fx, fy))
 		Sleep(2000);
 
 	return 0;
@@ -676,11 +684,11 @@ BOOL JiuYinWork::YanWu(HWND hwnd)
 			Sleep(2000);
 			LeftClick(hwnd, 510, 378);
 			Sleep(2000);
-			int fx, fy;
+			//int fx, fy;
 			for (size_t i = 0; i < 20; i++)
 			{
 				/*LeftClick(hwnd, 202, 272);
-				if (FindPicEx(hwnd, 0, 0, 666, 768, L"c:\\ts\\设置提示.bmp", 0x101010, 0.8, fx, fy))
+				if (FindPicEx(hwnd, 0, 0, 666, 768, L"ts\\设置提示.bmp", 0x101010, 0.8, fx, fy))
 				{
 					LeftClick(hwnd, 400, 573);
 					Sleep(2000);
@@ -702,7 +710,7 @@ BOOL JiuYinWork::YanWu(HWND hwnd)
 					Sleep(2000);
 
 				}
-				if (FindPicEx(hwnd, 0, 0, 666, 768, L"c:\\ts\\口令验证.bmp", 0x101010, 0.8, fx, fy))
+				if (FindPicEx(hwnd, 0, 0, 666, 768, L"ts\\口令验证.bmp", 0x101010, 0.8, fx, fy))
 				{
 					LeftClick(hwnd, 285, 483);
 					Sleep(2000);
@@ -754,9 +762,9 @@ BOOL JiuYinWork::Click(HWND hwnd, LPTSTR pbuf)
 	int fx, fy;
 	Sleep(100);
 	//flag = 1;
-	if (FindPicEx(hwnd, 400, 400, 1024, 1024, L"c:\\ts\\银子1.bmp", 0x111111, 0.9, fx, fy)
-		|| FindPicEx(hwnd, 400, 400, 1024, 1024, L"c:\\ts\\银子2.bmp", 0x111111, 0.9, fx, fy)
-		|| FindPicEx(hwnd, 400, 400, 1024, 1024, L"c:\\ts\\银子.bmp", 0x111111, 0.9, fx, fy)){
+	if (FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子1.bmp", 0x111111, 0.9, fx, fy)
+		|| FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子2.bmp", 0x111111, 0.9, fx, fy)
+		|| FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子.bmp", 0x111111, 0.9, fx, fy)){
 		//MessageBox(NULL, L"11", L"11", 0);
 		str2 = L"    领取到意外之财";
 		flag = 1;
@@ -770,11 +778,11 @@ BOOL JiuYinWork::Click(HWND hwnd, LPTSTR pbuf)
 		PTSTR pDllname = _tcsrchr(NoGetPath, TEXT('\\')) + 1;
 		_tcscpy_s(pDllname, _countof(NoGetPath) - (pDllname - NoGetPath),
 			TEXT("未领取到账号.txt"));
-		//wsprintf(path, L"c:\\ts\\11_未领取到银子_%s.txt", OldWindowText);
+		//wsprintf(path, L"ts\\11_未领取到银子_%s.txt", OldWindowText);
 		SaveLog(NoGetPath, windowTitle);                         //保存日志
 	}
 
-	if (FindPicEx(hwnd, 0, 0, 500, 500, L"c:\\ts\\意外之财.bmp", 0x101010, 0.8, fx, fy)){
+	if (FindPicEx(hwnd, 0, 0, 500, 500, L"ts\\意外之财.bmp", 0x101010, 0.8, fx, fy)){
 		str1 = L"    意外之财";
 	}
 	else{
@@ -782,7 +790,7 @@ BOOL JiuYinWork::Click(HWND hwnd, LPTSTR pbuf)
 	}
 
 
-	//if (FindPicEx(hwnd, 500, 300, 1024, 768, L"c:\\ts\\关闭.bmp", 0x101010, 0.9, fx, fy))
+	//if (FindPicEx(hwnd, 500, 300, 1024, 768, L"ts\\关闭.bmp", 0x101010, 0.9, fx, fy))
 	//{
 	//}
 
@@ -790,7 +798,7 @@ BOOL JiuYinWork::Click(HWND hwnd, LPTSTR pbuf)
 	LeftClick(hwnd, 740, 617);
 	Sleep(1000);
 
-	if (FindPicEx(hwnd, 300, 300, 950,600, L"c:\\ts\\复活.bmp", 0x101010, 0.9, fx, fy)){
+	if (FindPicEx(hwnd, 300, 300, 950,600, L"ts\\复活.bmp", 0x101010, 0.9, fx, fy)){
 		str3 = L"死亡";
 	}
 	else{
@@ -805,15 +813,15 @@ BOOL JiuYinWork::Click(HWND hwnd, LPTSTR pbuf)
 	//	Sleep(20);
 	//}
 	//DWORD ret = TS->FindPic(0, 0, 200, 200, "峨眉.bmp|烟雨.bmp|唐门.bmp", "303030", 0.8, 0, &X, &Y) + 1;
-	if (FindPicEx(hwnd, 30, 50, 100, 150, L"c:\\ts\\峨眉.bmp", 0x050505, 1, fx, fy))
+	if (FindPicEx(hwnd, 30, 50, 100, 150, L"ts\\峨眉.bmp", 0x050505, 1, fx, fy))
 	{
 		str4 = L"峨眉";
 	}
-	else if (FindPicEx(hwnd, 30, 50, 100, 150, L"c:\\ts\\烟雨.bmp", 0x050505, 1, fx, fy))
+	else if (FindPicEx(hwnd, 30, 50, 100, 150, L"ts\\烟雨.bmp", 0x050505, 1, fx, fy))
 	{
 		str4 = L"烟雨";
 	}
-	else if (FindPicEx(hwnd, 30, 50, 100, 150, L"c:\\ts\\唐门.bmp", 0x050505, 1, fx, fy))
+	else if (FindPicEx(hwnd, 30, 50, 100, 150, L"ts\\唐门.bmp", 0x050505, 1, fx, fy))
 	{
 		str4 = L"唐门";
 	}
@@ -856,15 +864,15 @@ unsigned int __stdcall ThreadWork(void *param){
 	//BOOL ret1;
 	//while (true)
 	//{
-	//	if (work->FindPicEx(hwnd, 400, 400, 1024, 1024, L"c:\\ts\\银子1.bmp", 0x151515, 0.9, fx, fy)
-	//		|| work->FindPicEx(hwnd, 400, 400, 1024, 1024, L"c:\\ts\\银子2.bmp", 0x151515, 0.9, fx, fy)
-	//		|| work->FindPicEx(hwnd, 400, 400, 1024, 1024, L"c:\\ts\\银子.bmp", 0x151515, 0.9, fx, fy)){
+	//	if (work->FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子1.bmp", 0x151515, 0.9, fx, fy)
+	//		|| work->FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子2.bmp", 0x151515, 0.9, fx, fy)
+	//		|| work->FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子.bmp", 0x151515, 0.9, fx, fy)){
 	//		MessageBox(NULL, L"11", L"11", 0);
 	//	}
 	//	//ret1 = work->FindColorEx(hwnd,700, 400, 1024, 768, 0x00FF00, 0X101010,fx,fy);
-	//	ret1 = work->FindPicEx(hwnd, 400, 400, 1024, 1024, L"c:\\ts\\银子.bmp", 0x101010, 0.9, fx, fy);
-	//	ret1 = work->FindPicEx(hwnd, 400, 400, 1024, 1024, L"c:\\ts\\银子1.bmp", 0x101010,0.9, fx, fy);
-	//	ret1 = work->FindPicEx(hwnd, 400, 400, 1024, 1024, L"c:\\ts\\银子2.bmp", 0x101010,0.9, fx, fy);
+	//	ret1 = work->FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子.bmp", 0x101010, 0.9, fx, fy);
+	//	ret1 = work->FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子1.bmp", 0x101010,0.9, fx, fy);
+	//	ret1 = work->FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子2.bmp", 0x101010,0.9, fx, fy);
 	//	Sleep(10);
 	//}
 
@@ -887,8 +895,8 @@ unsigned int __stdcall ThreadWork(void *param){
 
 	EnterCriticalSection(&g_cs);
 	srand((int)time(0));
-	DWORD randm_exit = (rand() % 40) + 80;
-	DWORD randm_login = (rand() % 30) + 50;
+	DWORD randm_exit = (rand() % 60) + 150;
+	DWORD randm_login = (rand() % 60) + 90;
 
 	UINT64  uiBaseTime, uiResult;
 	uiBaseTime = ((UINT64)work->filetime.dwHighDateTime << 32) + work->filetime.dwLowDateTime;
@@ -941,7 +949,7 @@ login:
 	GetLineFromFile(pzNouseAccount, buf);
 	LeaveCriticalSection(&g_cs1);
 	//int fx, fy;
-	//int ret = FindPic(hwnd, "c:\\ts\\九阴.bmp", 0x020202, 0.9, fx, fy);
+	//int ret = FindPic(hwnd, "ts\\九阴.bmp", 0x020202, 0.9, fx, fy);
 	work->GameLogin(work->hwnd, buf, L"1064671193k");
 
 	SYSTEMTIME cSysTime;

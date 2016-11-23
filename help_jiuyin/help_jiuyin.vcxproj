@@ -53,11 +53,15 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <ResourceCompile>
+      <PreprocessorDefinitions />
+    </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -81,12 +85,14 @@
     <ResourceCompile Include="..\JiuYin_Help.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\GetNetTime.cpp" />
     <ClCompile Include="..\JiuYinMain.cpp" />
     <ClCompile Include="..\JiuYinWork.cpp" />
     <ClCompile Include="..\SaveLog.cpp" />
     <ClCompile Include="..\TerminateProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\GetNetTime.h" />
     <ClInclude Include="..\JiuYinMain.h" />
     <ClInclude Include="..\JiuYinWork.h" />
     <ClInclude Include="..\resource.h" />

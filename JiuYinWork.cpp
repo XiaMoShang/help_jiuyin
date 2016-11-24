@@ -20,6 +20,8 @@ extern DWORD iDaquIndex, iXiaoIndex;
 extern bigQu MYJIUYINXUANQU[];
 extern LPTSTR pzNouseAccount, pzAccount;
 
+extern LPTSTR logbuf,accoutbuf;
+
 JiuYinWork::JiuYinWork()
 {
 }
@@ -741,45 +743,42 @@ BOOL JiuYinWork::Click(HWND hwnd, LPTSTR pbuf)
 	Sleep(100);
 
 	GetLocalTime(&serverTime);
-	LeftClick(hwnd, 1130 - 400, 294 - 30);
-	//Sleep(10);
 	LeftClick(hwnd, 1130 - 400, 366 - 30);
-	//Sleep(10);
+	LeftClick(hwnd, 1130 - 400, 294 - 30);
 	LeftClick(hwnd, 1130 - 400, 220 - 30);
-	//Sleep(10);
+
 	LeftClick(hwnd, 904 - 400, 137 - 30);
 	Sleep(100);
-	LeftClick(hwnd, 1130 - 400, 294 - 30);
-	//Sleep(10);
+
 	LeftClick(hwnd, 1130 - 400, 366 - 30);
-	//Sleep(10);
+	LeftClick(hwnd, 1130 - 400, 294 - 30);
 	LeftClick(hwnd, 1130 - 400, 220 - 30);
-	//Sleep(10);
+
+	LeftClick(hwnd, 904 - 400, 137 - 30);
+	Sleep(100);
+
+	LeftClick(hwnd, 1130 - 400, 366 - 30);
+	LeftClick(hwnd, 1130 - 400, 294 - 30);
+	LeftClick(hwnd, 1130 - 400, 220 - 30);
 
 	Data->SleepTime = 288;
 	TCHAR  windowTitle[256];
 	LPTSTR str2, str1, str3, str4;
 	int fx, fy;
-	Sleep(100);
+	//Sleep(100);
 	//flag = 1;
 	if (FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子1.bmp", 0x111111, 0.9, fx, fy)
 		|| FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子2.bmp", 0x111111, 0.9, fx, fy)
 		|| FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子.bmp", 0x111111, 0.9, fx, fy)){
 		//MessageBox(NULL, L"11", L"11", 0);
-		str2 = L"    领取到意外之财";
 		flag = 1;
+		str2 = L"    领取到意外之财";
 
 	}
 	else{
 		str2 = L"没有领取到意外之财";
 		wsprintf(windowTitle, L"%s\n", pbuf);
-		TCHAR NoGetPath[MAX_PATH];
-		GetModuleFileName(NULL, NoGetPath, _countof(NoGetPath));
-		PTSTR pDllname = _tcsrchr(NoGetPath, TEXT('\\')) + 1;
-		_tcscpy_s(pDllname, _countof(NoGetPath) - (pDllname - NoGetPath),
-			TEXT("未领取到账号.txt"));
-		//wsprintf(path, L"ts\\11_未领取到银子_%s.txt", OldWindowText);
-		SaveLog(NoGetPath, windowTitle);                         //保存日志
+		StrCat(accoutbuf, windowTitle);
 	}
 
 	if (FindPicEx(hwnd, 0, 0, 500, 500, L"ts\\意外之财.bmp", 0x101010, 0.8, fx, fy)){
@@ -837,13 +836,7 @@ BOOL JiuYinWork::Click(HWND hwnd, LPTSTR pbuf)
 		serverTime.wYear, serverTime.wMonth, serverTime.wDay, serverTime.wHour, serverTime.wMinute,
 		serverTime.wSecond, serverTime.wMilliseconds, serverTime.wDayOfWeek, pbuf, str1, str2, str3, str4);
 
-	TCHAR ConfigPath[MAX_PATH];
-	GetModuleFileName(NULL, ConfigPath, _countof(ConfigPath));
-	PTSTR pDllname = _tcsrchr(ConfigPath, TEXT('\\')) + 1;
-	_tcscpy_s(pDllname, _countof(ConfigPath) - (pDllname - ConfigPath),
-		TEXT("领工资日志.txt"));
-
-	SaveLog(ConfigPath, windowTitle);                         //保存日志
+	StrCat(logbuf, windowTitle);
 	return true;
 }
 
@@ -895,15 +888,15 @@ unsigned int __stdcall ThreadWork(void *param){
 
 	EnterCriticalSection(&g_cs);
 	srand((int)time(0));
-	DWORD randm_exit = (rand() % 60) + 150;
+	DWORD randm_exit = (rand() % 100) + 150;
 	DWORD randm_login = (rand() % 60) + 90;
 
-	UINT64  uiBaseTime, uiResult;
+	UINT64  uiBaseTime, MyFileTime_exit, MyFileTime_login;
 	uiBaseTime = ((UINT64)work->filetime.dwHighDateTime << 32) + work->filetime.dwLowDateTime;
-	uiResult = uiBaseTime - randm_exit*(UINT64)10000000;
-	FileTimeToSystemTime((LPFILETIME)&uiResult, &MySystemTime_exit);
-	uiResult = uiBaseTime - randm_login*(UINT64)10000000;
-	FileTimeToSystemTime((LPFILETIME)&uiResult, &MySystemTime_login);
+	MyFileTime_exit = uiBaseTime - randm_exit*(UINT64)10000000;
+	FileTimeToSystemTime((LPFILETIME)&MyFileTime_exit, &MySystemTime_exit);
+	MyFileTime_login = uiBaseTime - randm_login*(UINT64)10000000;
+	FileTimeToSystemTime((LPFILETIME)&MyFileTime_login, &MySystemTime_login);
 
 	
 login:
@@ -911,7 +904,7 @@ login:
 	{
 		goto login;
 	}
-	for (size_t i = 0; i < 30; i++)
+	for (size_t i = 0; i < 20; i++)
 	{
 		work->SetWindowHwnd(FindWindow(L"FxMain", MYJIUYINXUANQU[iDaquIndex].mySmallQu[iXiaoIndex].pName));
 		if (!work->GetWindowHwnd())
@@ -952,18 +945,25 @@ login:
 	//int ret = FindPic(hwnd, "ts\\九阴.bmp", 0x020202, 0.9, fx, fy);
 	work->GameLogin(work->hwnd, buf, L"1064671193k");
 
-	SYSTEMTIME cSysTime;
-	GetLocalTime(&cSysTime);
+	//SYSTEMTIME cSysTime;
+	//GetLocalTime(&cSysTime);
 
+
+	FILETIME filetime;
+	GetSystemTimeAsFileTime(&filetime);
 	//if (1)
 	//{
 	//	work->YanWu(work->hwnd);
 	//	work->ExitGameWindow(work->hwnd);										//返回登录界面
 	//}
-
-	while (!(cSysTime.wHour >= MySystemTime_exit.wHour && cSysTime.wMinute >= (MySystemTime_exit.wMinute) && cSysTime.wSecond >= MySystemTime_exit.wSecond && cSysTime.wHour < 21))
+	while ((((UINT64)filetime.dwHighDateTime << 32) + filetime.dwLowDateTime) + (UINT64)8 * 60 * 60 * 10000000 <= MyFileTime_exit)
 	{
-		GetLocalTime(&cSysTime);
+		GetSystemTimeAsFileTime(&filetime);
+
+		//SYSTEMTIME test;
+		//FileTimeToSystemTime((LPFILETIME)&MyFileTime_exit, &test);
+
+		//FileTimeToSystemTime(&filetime, &test);
 		//SetSystemTime(&cSysTime);
 		if (flag == 1)
 		{
@@ -974,10 +974,9 @@ login:
 
 	work->ExitGameWindow(work->hwnd);										//返回登录界面
 
-	while (!(cSysTime.wHour >= MySystemTime_login.wHour && cSysTime.wMinute >= (MySystemTime_login.wMinute) && cSysTime.wSecond >= MySystemTime_login.wSecond && cSysTime.wHour < 21))
+	while ((((UINT64)filetime.dwHighDateTime << 32) + filetime.dwLowDateTime) + (UINT64)8 * 60 * 60*10000000 <= MyFileTime_login)
 	{
-		GetLocalTime(&cSysTime);
-		//SetSystemTime(&cSysTime);
+		GetSystemTimeAsFileTime(&filetime);
 		if (flag == 1)
 		{
 			break;
@@ -993,13 +992,12 @@ login:
 
 
 
-	while (!(cSysTime.wHour >= MySystemTime_y.wHour && cSysTime.wMinute >= (MySystemTime_y.wMinute) && cSysTime.wSecond >= MySystemTime_y.wSecond && cSysTime.wHour < 21))
+	while ((((UINT64)filetime.dwHighDateTime << 32) + filetime.dwLowDateTime) + (UINT64)8 * 60 * 60 * 10000000 <= myBaseTime)
 	{
-		GetLocalTime(&cSysTime);
-		//SetSystemTime(&cSysTime);
+		GetSystemTimeAsFileTime(&filetime);
 		if (flag == 1)
 			break;
-		Sleep(100);
+		Sleep(10);
 	}
 
 	work->Data->SleepTime = 60;

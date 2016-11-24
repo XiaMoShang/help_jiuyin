@@ -24,6 +24,11 @@ DWORD iDaquIndex, iXiaoIndex;
 JiuYinWork JiuWork[100];
 LPTSTR pzNouseAccount, pzAccount;
 
+//TCHAR  logbuf[1024 * 256] = L"***************************************************************\n";
+
+LPTSTR logbuf = new TCHAR[1024 * 512];
+LPTSTR accoutbuf = new TCHAR[1024 * 20];
+
 
 bigQu MYJIUYINXUANQU[] = {
 	{ 0, L"江湖三区", { { 0, L"九阴真经  江湖三区-世外桃源" }, { 1, L"九阴真经  江湖三区-世家风云" }, { 2, L"九阴真经  江湖三区-雄霸天下" }, { 3, L"" }, { 4, L"" }, { 5, L"" }, { 6, L"" }, { 7, L"" }, { 8, L"" }, { 9, L"" } } },
@@ -275,9 +280,19 @@ BOOL Dlg_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam) {
 	_tcscpy_s(pDllname, _countof(ConfigPath) - (pDllname - ConfigPath),
 		TEXT("config.ini"));
 	InitConfigFormFile(hwnd, ConfigPath);
-	//InitializeCriticalSection(&g_cs_fic);
 
-	DWORD dwTime;
+	for (size_t i = 0; i < sizeof(logbuf); i++)
+	{
+		logbuf[i] = '\0';
+	}
+	StrCat(logbuf, L"**************************************************************************************************************************************\n");
+
+	for (size_t i = 0; i < sizeof(accoutbuf); i++)
+	{
+		accoutbuf[i] = '\0';
+	}
+	StrCat(accoutbuf, L"**************************************************************************************************************************************\n");
+
 	SYSTEMTIME systemtime;
 	if (ServerTimeToSysTime(&systemtime))
 	{
@@ -399,6 +414,21 @@ void Dlg_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify) {
 	switch (id) {
 
 	case IDCANCEL:{
+					  TCHAR ConfigPath[MAX_PATH];
+					  GetModuleFileName(NULL, ConfigPath, _countof(ConfigPath));
+					  PTSTR pDllname = _tcsrchr(ConfigPath, TEXT('\\')) + 1;
+					  _tcscpy_s(pDllname, _countof(ConfigPath) - (pDllname - ConfigPath),
+						  TEXT("领工资日志.txt"));
+					  SaveLog(ConfigPath, logbuf);                         //保存日志
+
+					  TCHAR NoGetPath[MAX_PATH];
+					  GetModuleFileName(NULL, NoGetPath, _countof(NoGetPath));
+					  pDllname = _tcsrchr(NoGetPath, TEXT('\\')) + 1;
+					  _tcscpy_s(pDllname, _countof(NoGetPath) - (pDllname - NoGetPath),
+						  TEXT("未领取到账号.txt"));
+					  //wsprintf(path, L"ts\\11_未领取到银子_%s.txt", OldWindowText);
+					  SaveLog(NoGetPath, accoutbuf);                         //保存日志
+
 					  for (size_t i = 0; i < 100; i++)
 					  {
 						  if (JiuWork[i].Data != NULL)
@@ -406,16 +436,20 @@ void Dlg_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify) {
 							  JiuWork[i].ExitProcess();
 						  }  
 					  }
-					  
-					  TCHAR ConfigPath[MAX_PATH];
+					  	
 					  GetModuleFileName(NULL, ConfigPath, _countof(ConfigPath));
-					  PTSTR pDllname = _tcsrchr(ConfigPath, TEXT('\\')) + 1;
+						pDllname = _tcsrchr(ConfigPath, TEXT('\\')) + 1;
 					  _tcscpy_s(pDllname, _countof(ConfigPath) - (pDllname - ConfigPath),
 						  TEXT("config.ini"));
 					  SaveConfigFormFile(hwnd, ConfigPath);
 
 					  DeleteFile(szAccountPath);
 					  DeleteFile(szNouseAccountPath);
+
+					  //free(logbuf);
+
+					  delete[] logbuf;
+					  delete[] accoutbuf;
 					  EndDialog(hwnd, id);
 					  break;
 	}

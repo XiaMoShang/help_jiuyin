@@ -24,4 +24,6 @@ typedef struct {
 	COLORREF ColorDataInfo[2000][2000];
 }ShareMap, *LPShareMap;
 
+
+
 #endif

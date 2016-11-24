@@ -17,8 +17,10 @@ DWORD SaveLog(LPTSTR pSavePathName, LPTSTR pLogText)
 	}
 	else
 	{
-		
-		out.write(W2A(pLogText), strlen(W2A(pLogText)));
+		if (pLogText !=NULL)
+		{
+			out.write(W2A(pLogText), strlen(W2A(pLogText)));
+		}	
 		out.close();
 		return 0;
 	}

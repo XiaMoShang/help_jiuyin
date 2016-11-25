@@ -119,6 +119,25 @@ unsigned int WINAPI CloseWindows(void * param){
 	}
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//更新时间
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+unsigned int WINAPI UpdateTime(void * param){
+
+	SYSTEMTIME systemtime;
+	if (ServerTimeToSysTime(&systemtime))
+	{
+		SetSystemTime(&systemtime);
+		//MessageBox(NULL, L"time updata sucessful", L"ok", NULL);
+		SetDlgItemText((HWND)*(DWORD *)param, IDC_BUT_UPDATETIME, L"update time");
+	}
+	else
+	{
+		MessageBox(NULL, L"time updata fail,plase restart", L"error", NULL);
+	}
+	return 0;
+}
 
 
 BOOL InitConfigFormFile(HWND hwnd, LPTSTR ConfigFilePath)
@@ -293,16 +312,7 @@ BOOL Dlg_OnInitDialog(HWND hwnd, HWND hwndFocus, LPARAM lParam) {
 	}
 	StrCat(accoutbuf, L"**************************************************************************************************************************************\n");
 
-	SYSTEMTIME systemtime;
-	if (ServerTimeToSysTime(&systemtime))
-	{
-		SetSystemTime(&systemtime);
-	}
-	else
-	{
-		MessageBox(NULL, L"time updata fail,plase restart", L"error", NULL);
-	}
-
+	
 	return(TRUE);
 }
 
@@ -406,7 +416,7 @@ void EnableDebugPriv() {
 }
 
 
-
+uintptr_t hUpdateThread;
 
 void Dlg_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify) {
 	WPARAM wParam = 0;
@@ -459,6 +469,25 @@ void Dlg_OnCommand(HWND hwnd, int id, HWND hwndCtl, UINT codeNotify) {
 			 //MyTerminateProcess(L"fxgame.exe");
 			 ChoiseWork(hwnd, GETMONEY);
 			break;
+	}
+
+	case IDC_BUT_UPDATETIME:{
+
+				TCHAR ButterText[MAX_PATH];
+				GetDlgItemTextW(hwnd, IDC_BUT_UPDATETIME, ButterText, MAX_PATH);
+				static HWND myhwndupdate = hwnd;
+				if (!wcscmp(ButterText, L"update time"))
+				{
+
+					hUpdateThread = _beginthreadex(NULL, 0, UpdateTime, &myhwndupdate, 0, 0);
+					SetDlgItemText(hwnd, IDC_BUT_UPDATETIME, L"Stop Update");
+				}
+				else if (!wcscmp(ButterText, L"Stop Update"))
+				{
+					TerminateThread((HANDLE)hUpdateThread, 0);
+					SetDlgItemText(hwnd, IDC_BUT_UPDATETIME, L"update time");
+				}
+				break;
 	}
 	case IDC_BUT_ACCOUNT:{
 							 chooseFile(pzAccountPath);

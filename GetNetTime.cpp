@@ -14,7 +14,7 @@ struct NISTSVR{
 NISTSVRSARY[] = {
 	{ 0, { 202, 112, 26, 37 }, L"s2g.time.edu.cn", L"华东南地区网络中心" },
 	{ 1, { 129, 6, 15, 29 }, _T("time-b.nist.gov"), _T("NIST，盖士堡，马里兰州") },
-	{ 2, { 202, 112, 7, 13 }, _T("s2m.time.edu.cn"), _T("北京大学") },	
+	{ 2, { 120, 24,166, 46 }, _T("s2m.time.edu.cn"), _T("北京大学") },	
 	{ 3, { 132, 163, 4, 101 }, _T("time-a.timefreq.bldrdoc.gov"), _T("NIST，博耳德市，科罗拉多州") },
 	{ 4, { 132, 163, 4, 102 }, _T("time-b.timefreq.bldrdoc.gov"), _T("NIST，博耳德市，科罗拉多州") },
 	{ 5, { 132, 163, 4, 103 }, _T("time-c.timefreq.bldrdoc.gov"), _T("NIST，博耳德市，科罗拉多州") },
@@ -56,7 +56,7 @@ BOOL GetTimeFromServer(DWORD *lpdwTime)
 {
 	*lpdwTime = 0;
 	BOOL bReturn = FALSE;
-	for (size_t i = 0; i < 6; i++)
+	for (size_t i = 1; i < 6; i++)
 	{
 		SOCKET sSock = socket(AF_INET, SOCK_STREAM, 0);
 		DWORD err = GetLastError();

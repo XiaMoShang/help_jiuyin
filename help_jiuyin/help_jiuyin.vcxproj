@@ -105,6 +105,9 @@
   <ItemGroup>
     <Image Include="..\jiuyin.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\update.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

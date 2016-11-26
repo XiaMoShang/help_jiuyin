@@ -1,15 +1,7 @@
-﻿生成启动时间为 2016/11/25 17:32:34。
-     1>项目“E:\MyCode\C++Code\help_jiuyin\help_jiuyin\help_jiuyin.vcxproj”在节点 2 上(Rebuild 个目标)。
+﻿生成启动时间为 2016/11/26 13:18:05。
+     1>项目“E:\MyCode\C++Code\help_jiuyin\help_jiuyin\help_jiuyin.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
-         D:\vs2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\GetNetTime.cpp ..\JiuYinMain.cpp ..\JiuYinWork.cpp ..\SaveLog.cpp ..\TerminateProcess.cpp
-         TerminateProcess.cpp
-         SaveLog.cpp
-     1>e:\mycode\c++code\help_jiuyin\savelog.cpp(73): warning C4244: “初始化”: 从“std::streamoff”转换到“unsigned int”，可能丢失数据
-     1>e:\mycode\c++code\help_jiuyin\savelog.cpp(84): warning C4244: “参数”: 从“std::streamoff”转换到“size_t”，可能丢失数据
-     1>e:\mycode\c++code\help_jiuyin\savelog.cpp(114): warning C4244: “=”: 从“std::streamoff”转换到“long”，可能丢失数据
-     1>e:\mycode\c++code\help_jiuyin\savelog.cpp(138): warning C4018: “<”: 有符号/无符号不匹配
-     1>e:\mycode\c++code\help_jiuyin\savelog.cpp(186): warning C4244: “初始化”: 从“std::streamoff”转换到“unsigned int”，可能丢失数据
-     1>e:\mycode\c++code\help_jiuyin\savelog.cpp(197): warning C4244: “参数”: 从“std::streamoff”转换到“size_t”，可能丢失数据
+         D:\vs2013\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\JiuYinWork.cpp
          JiuYinWork.cpp
      1>e:\mycode\c++code\help_jiuyin\jiuyinwork.cpp(279): warning C4018: “<”: 有符号/无符号不匹配
      1>e:\mycode\c++code\help_jiuyin\jiuyinwork.cpp(297): warning C4018: “<”: 有符号/无符号不匹配
@@ -21,11 +13,6 @@
      1>e:\mycode\c++code\help_jiuyin\jiuyinwork.cpp(483): warning C4018: “<”: 有符号/无符号不匹配
      1>e:\mycode\c++code\help_jiuyin\jiuyinwork.cpp(558): warning C4018: “<”: 有符号/无符号不匹配
      1>e:\mycode\c++code\help_jiuyin\jiuyinwork.cpp(560): warning C4018: “<”: 有符号/无符号不匹配
-         JiuYinMain.cpp
-         GetNetTime.cpp
-         正在生成代码...
-       ResourceCompile:
-         C:\Program Files (x86)\Windows Kits\8.1\bin\x86\rc.exe /l"0x0409" /nologo /fo"Debug\JiuYin_Help.res" ..\JiuYin_Help.rc 
        Link:
          D:\vs2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\MyCode\C++Code\help_jiuyin\Debug\help_jiuyin.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\MyCode\C++Code\help_jiuyin\Debug\help_jiuyin.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\MyCode\C++Code\help_jiuyin\Debug\help_jiuyin.lib" /MACHINE:X86 Debug\JiuYin_Help.res
          Debug\GetNetTime.obj
@@ -34,8 +21,8 @@
          Debug\SaveLog.obj
          Debug\TerminateProcess.obj
          help_jiuyin.vcxproj -> E:\MyCode\C++Code\help_jiuyin\Debug\help_jiuyin.exe
-     1>已完成生成项目“E:\MyCode\C++Code\help_jiuyin\help_jiuyin\help_jiuyin.vcxproj”(Rebuild 个目标)的操作。
+     1>已完成生成项目“E:\MyCode\C++Code\help_jiuyin\help_jiuyin\help_jiuyin.vcxproj”(Build 个目标)的操作。
 
 生成成功。
 
-已用时间 00:00:04.44
+已用时间 00:00:01.51

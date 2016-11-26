@@ -739,47 +739,73 @@ BOOL JiuYinWork::YanWu(HWND hwnd)
 BOOL JiuYinWork::Click(HWND hwnd, LPTSTR pbuf)
 {
 	SYSTEMTIME serverTime;
+	TCHAR  windowTitle[256];
+	LPTSTR str2, str1, str3, str4;
+	int fx, fy;
 	LeftClick(hwnd, 904 - 400, 137 - 30);
 	Sleep(100);
 
 	GetLocalTime(&serverTime);
 	LeftClick(hwnd, 1130 - 400, 366 - 30);
-	LeftClick(hwnd, 1130 - 400, 294 - 30);
-	LeftClick(hwnd, 1130 - 400, 220 - 30);
 
-	LeftClick(hwnd, 904 - 400, 137 - 30);
-	Sleep(100);
-
-	LeftClick(hwnd, 1130 - 400, 366 - 30);
-	LeftClick(hwnd, 1130 - 400, 294 - 30);
-	LeftClick(hwnd, 1130 - 400, 220 - 30);
-
-	LeftClick(hwnd, 904 - 400, 137 - 30);
-	Sleep(100);
-
-	LeftClick(hwnd, 1130 - 400, 366 - 30);
-	LeftClick(hwnd, 1130 - 400, 294 - 30);
-	LeftClick(hwnd, 1130 - 400, 220 - 30);
-
-	Data->SleepTime = 288;
-	TCHAR  windowTitle[256];
-	LPTSTR str2, str1, str3, str4;
-	int fx, fy;
-	//Sleep(100);
 	//flag = 1;
 	if (FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子1.bmp", 0x111111, 0.9, fx, fy)
 		|| FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子2.bmp", 0x111111, 0.9, fx, fy)
 		|| FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子.bmp", 0x111111, 0.9, fx, fy)){
 		//MessageBox(NULL, L"11", L"11", 0);
 		flag = 1;
-		str2 = L"    领取到意外之财";
+		str2 = L"    领取到意外之财1";
+		goto getmm;
+	}
+	LeftClick(hwnd, 1130 - 400, 294 - 30);
+	LeftClick(hwnd, 1130 - 400, 220 - 30);
 
+	LeftClick(hwnd, 904 - 400, 137 - 30);
+	Sleep(50);
+	LeftClick(hwnd, 1130 - 400, 366 - 30);
+	if (FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子1.bmp", 0x111111, 0.9, fx, fy)
+		|| FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子2.bmp", 0x111111, 0.9, fx, fy)
+		|| FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子.bmp", 0x111111, 0.9, fx, fy)){
+		//MessageBox(NULL, L"11", L"11", 0);
+		flag = 1;
+		str2 = L"    领取到意外之财2";
+		goto getmm;
+	}
+	LeftClick(hwnd, 1130 - 400, 294 - 30);
+	LeftClick(hwnd, 1130 - 400, 220 - 30);
+
+	LeftClick(hwnd, 904 - 400, 137 - 30);
+	Sleep(50);
+	LeftClick(hwnd, 1130 - 400, 366 - 30);
+	if (FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子1.bmp", 0x111111, 0.9, fx, fy)
+		|| FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子2.bmp", 0x111111, 0.9, fx, fy)
+		|| FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子.bmp", 0x111111, 0.9, fx, fy)){
+		//MessageBox(NULL, L"11", L"11", 0);
+		flag = 1;
+		str2 = L"    领取到意外之财3";
+		goto getmm;
 	}
 	else{
 		str2 = L"没有领取到意外之财";
 		wsprintf(windowTitle, L"%s\n", pbuf);
 		StrCat(accoutbuf, windowTitle);
 	}
+	LeftClick(hwnd, 1130 - 400, 294 - 30);
+	LeftClick(hwnd, 1130 - 400, 220 - 30);
+
+	Data->SleepTime = 288;
+	
+	//Sleep(100);
+	//flag = 1;
+	//if (FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子1.bmp", 0x111111, 0.9, fx, fy)
+	//	|| FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子2.bmp", 0x111111, 0.9, fx, fy)
+	//	|| FindPicEx(hwnd, 400, 400, 1024, 1024, L"ts\\银子.bmp", 0x111111, 0.9, fx, fy)){
+	//	//MessageBox(NULL, L"11", L"11", 0);
+	//	flag = 1;
+	//	str2 = L"    领取到意外之财";
+
+	//}
+getmm:
 
 	if (FindPicEx(hwnd, 0, 0, 500, 500, L"ts\\意外之财.bmp", 0x101010, 0.8, fx, fy)){
 		str1 = L"    意外之财";
